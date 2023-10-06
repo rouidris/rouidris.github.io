@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6f95e6f0.css",
+    "main.js": "/static/js/main.1e1b51dd.js",
+    "static/media/4_695x464_242_waifu2x_art_noise1_scale.png": "/static/media/4_695x464_242_waifu2x_art_noise1_scale.33713365b815bdc52596.png",
+    "static/media/image 33.png": "/static/media/image 33.80bf2023cd23b9ba434e.png",
+    "static/media/scale_1200.png": "/static/media/scale_1200.f02a0ec9e799dd80677d.png",
+    "static/media/image 32.jpg": "/static/media/image 32.9ab57dd995a666d0ed76.jpg",
+    "static/media/field.jpg": "/static/media/field.3fc604654f9ef0cb9ddc.jpg",
+    "static/media/fieldthree.jpg": "/static/media/fieldthree.aea48144884e3c1e3f3c.jpg",
+    "index.html": "/index.html",
+    "main.6f95e6f0.css.map": "/static/css/main.6f95e6f0.css.map",
+    "main.1e1b51dd.js.map": "/static/js/main.1e1b51dd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6f95e6f0.css",
+    "static/js/main.1e1b51dd.js"
+  ]
+}
