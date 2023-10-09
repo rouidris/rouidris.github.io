@@ -6,14 +6,12 @@ import { Link } from 'react-router-dom'
 export const PostItem = ({ post }) => {
     if (!post) {
         return (
-            <div className='text-xl text-center text-white py-10'>
-                Загрузка...
-            </div>
+            <div> </div>
         )
     }
     return (
         <Link to={`/${post._id}`}>
-            <div className='flex flex-col basis-1/4 flex-grow'>
+            <div className='flex flex-col basis-1/4 flex-grow p-1' style={{backgroundColor: " black "}}>
                 <div
                     className={
                         post.imgUrl ? 'flex rouded-sm h-80' : 'flex rounded-sm'
@@ -38,6 +36,9 @@ export const PostItem = ({ post }) => {
                 <div className='text-white text-xl'>{post.title}</div>
                 <p className='text-white opacity-60 text-xs pt-4 line-clamp-4'>
                     {post.text}
+                </p>
+                <p className='text-white opacity-60 text-xs pt-4 line-clamp-4'>
+                    {post.area} m2
                 </p>
 
                 <div className='flex gap-3 items-center mt-2'>

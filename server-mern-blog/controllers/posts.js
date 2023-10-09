@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 // Create Post
 export const createPost = async (req, res) => {
     try {
-        const { title, text } = req.body
+        const { title, text, area } = req.body
         const user = await User.findById(req.userId)
 
         if (req.files) {
@@ -19,6 +19,7 @@ export const createPost = async (req, res) => {
                 username: user.username,
                 title,
                 text,
+                area,
                 imgUrl: fileName,
                 author: req.userId,
             })
@@ -35,6 +36,7 @@ export const createPost = async (req, res) => {
             username: user.username,
             title,
             text,
+            area,
             imgUrl: '',
             author: req.userId,
         })
@@ -111,7 +113,7 @@ export const removePost = async (req, res) => {
 // Update post
 export const updatePost = async (req, res) => {
     try {
-        const { title, text, id } = req.body
+        const { title, text, area, id } = req.body
         const post = await Post.findById(id)
 
         if (req.files) {
@@ -123,6 +125,7 @@ export const updatePost = async (req, res) => {
 
         post.title = title
         post.text = text
+        post.area = area
 
         await post.save()
 

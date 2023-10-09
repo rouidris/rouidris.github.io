@@ -2,6 +2,49 @@ import User from '../models/User.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
+
+
+// test phoneUser
+export const test = async (req, res) => {
+    try {
+        const { phoneNumber } = req.body;
+
+        // Поиск пользователя по userId
+        const user = await User.findById(req.userId);
+
+        if (!user) {
+            return res.json({
+                message: 'Пользователь не найден test',
+            });
+        }
+
+        // Обновление номера телефона пользователя
+        user.phone = phoneNumber;
+        await user.save();
+
+        // Генерация нового токена
+        const token = jwt.sign(
+            {
+                id: user._id,
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '30d' },
+        );
+
+        // Отправка ответа с обновленными данными пользователя и токеном
+        res.json({
+            message: 'Номер телефона обновлен',
+            user,
+            token
+        });
+    } catch (error) {
+        // Обработка ошибок, если они возникнут
+        console.error(error);
+        res.status(500).json({ message: 'Произошла ошибка' });
+    }
+}
+
+
 // Register user
 export const register = async (req, res) => {
     try {
@@ -39,6 +82,7 @@ export const register = async (req, res) => {
             message: 'Регистрация прошла успешно.',
         })
     } catch (error) {
+        console.error(error);
         res.json({ message: 'Ошибка при создании пользователя.' })
     }
 }
@@ -105,6 +149,7 @@ export const getMe = async (req, res) => {
             token,
         })
     } catch (error) {
-        res.json({ message: 'Нет доступа.' })
+        res.json({message: 'Нет доступа из контроллера.'})
     }
 }
+

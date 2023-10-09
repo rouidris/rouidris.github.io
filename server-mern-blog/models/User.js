@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        phone: {
+            type: Number,
+            default: '',
+        },
         posts: [
             {
                 type: mongoose.Schema.Types.ObjectId,

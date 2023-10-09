@@ -34,7 +34,7 @@ export const PostPage = () => {
     const removePostHandler = () => {
         try {
             dispatch(removePost(params.id))
-            toast('Пост был удален')
+            toast('Поле было удалено')
             navigate('/posts')
         } catch (error) {
             console.log(error)
@@ -87,9 +87,9 @@ export const PostPage = () => {
                 </Link>
             </button>
 
-            <div className='flex gap-10 py-8'>
+            <div className='flex gap-10 py-8 '>
                 <div className='w-2/3'>
-                    <div className='flex flex-col basis-1/4 flex-grow'>
+                    <div className='flex flex-col basis-1/4 flex-grow '>
                         <div
                             className={
                                 post?.imgUrl
@@ -118,6 +118,9 @@ export const PostPage = () => {
                     <div className='text-white text-xl'>{post.title}</div>
                     <p className='text-white opacity-60 text-xs pt-4'>
                         {post.text}
+                    </p>
+                    <p className='text-white opacity-60 text-xs pt-4'>
+                        {post.area} m2
                     </p>
 
                     <div className='flex gap-3 items-center mt-2 justify-between'>

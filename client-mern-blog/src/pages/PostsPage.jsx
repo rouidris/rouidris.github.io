@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { PostItem } from '../components/PostItem'
 import axios from '../utils/axios'
-
+// import ModalWindows from "../components/ModalWIndows";
 export const PostsPage = () => {
     const [posts, setPosts] = useState([])
 
@@ -11,6 +11,7 @@ export const PostsPage = () => {
         try {
             const { data } = await axios.get('/posts/user/me')
             setPosts(data)
+            console.log("PostsPage.jsx")
         } catch (error) {
             console.log(error)
         }
@@ -21,10 +22,17 @@ export const PostsPage = () => {
     }, [])
 
     return (
-        <div className='w-1/2 mx-auto py-10 flex flex-col gap-10'>
+        <div className='w-1/2 mx-auto py-10 flex flex-col gap-10 '>
+            {/*<ModalWindows/>*/}
+
             {posts?.map((post, idx) => (
                 <PostItem post={post} key={idx} />
             ))}
+
+
+
+
         </div>
+
     )
 }

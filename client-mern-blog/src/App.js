@@ -31,6 +31,7 @@ function App() {
                 <Route path='new' element={<AddPostPage />} />
                 <Route path='register' element={<RegisterPage />} />
                 <Route path='login' element={<LoginPage />} />
+
             </Routes>
 
             <ToastContainer position='bottom-right' />

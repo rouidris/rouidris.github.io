@@ -6,6 +6,7 @@ const initialState = {
     token: null,
     isLoading: false,
     status: null,
+    phoneNumber: '',
 }
 
 export const registerUser = createAsyncThunk(
@@ -52,7 +53,19 @@ export const getMe = createAsyncThunk('auth/loginUser', async () => {
         console.log(error)
     }
 })
-
+export const phoneUser = createAsyncThunk(
+    'auth/phoneUser',
+    async ({ phoneNumber }) => {
+        try {
+            const { data } = await axios.post('/auth/test', {
+                phoneNumber,
+            })
+            return data
+        } catch (error) {
+            console.log(error)
+        }
+    },
+)
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -62,6 +75,7 @@ export const authSlice = createSlice({
             state.token = null
             state.isLoading = false
             state.status = null
+            state.phoneNumber = ''
         },
     },
     extraReducers: {
@@ -90,6 +104,7 @@ export const authSlice = createSlice({
             state.status = action.payload.message
             state.user = action.payload.user
             state.token = action.payload.token
+            state.username = action.payload.username;
         },
         [loginUser.rejectWithValue]: (state, action) => {
             state.status = action.payload.message
@@ -117,3 +132,4 @@ export const checkIsAuth = (state) => Boolean(state.auth.token)
 
 export const { logout } = authSlice.actions
 export default authSlice.reducer
+

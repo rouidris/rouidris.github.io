@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createPost } from '../redux/features/post/postSlice'
+import Map from '../components/MapArea'
 
 export const AddPostPage = () => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const [image, setImage] = useState('')
+    const [area, setArea] = useState('')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -17,6 +19,7 @@ export const AddPostPage = () => {
             data.append('title', title)
             data.append('text', text)
             data.append('image', image)
+            data.append('area', area)
             dispatch(createPost(data))
             navigate('/')
         } catch (error) {
@@ -30,7 +33,7 @@ export const AddPostPage = () => {
 
     return (
         <form
-            className='w-1/3 mx-auto py-10'
+            className='w-2/3 mx-auto py-10'
             onSubmit={(e) => e.preventDefault()}
         >
             <label className='text-gray-300 py-2 bg-gray-600 text-xs mt-2 flex items-center justify-center border-2 border-dotted cursor-pointer'>
@@ -48,27 +51,42 @@ export const AddPostPage = () => {
             </div>
 
             <label className='text-xs text-white opacity-70'>
-                Заголовок поста:
+                Название поля:
                 <input
                     type='text'
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder='Заголовок'
+                    placeholder='Название'
                     className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none placeholder:text-gray-700'
                 />
             </label>
 
-            <label className='text-xs text-white opacity-70'>
-                Текст поста:
+            <label className='text-xs text-white opacity-70 mt-16'>
+                Описание поля:
                 <textarea
                     onChange={(e) => setText(e.target.value)}
                     value={text}
-                    placeholder='Текст поста'
+                    placeholder='Категория, почва, растения и другие подробности'
                     className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none resize-none h-40 placeholder:text-gray-700'
                 />
             </label>
 
-            <div className='flex gap-8 items-center justify-center mt-4'>
+            <div className='flex flex-col w-full mb-6 mt-16 text-center text-orange-500  text-sx'>
+                <Map/>
+            </div>
+
+            <label className='text-xs text-white opacity-70 '>
+                Введите площадь поля(в квадратных метрах)
+                    <input
+                        type={"number"}
+                        value={area}
+                        onChange={(e) => setArea(e.target.value)}
+                        className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none resize-none placeholder:text-gray-700'
+                    />
+
+                </label>
+
+            <div className='flex gap-8 items-center justify-center mt-10'>
                 <button
                     onClick={submitHandler}
                     className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'

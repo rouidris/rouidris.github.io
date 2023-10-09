@@ -9,6 +9,7 @@ import axios from '../utils/axios'
 export const EditPostPage = () => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
+    const [area, setArea] = useState('')
     const [oldImage, setOldImage] = useState('')
     const [newImage, setNewImage] = useState('')
 
@@ -20,6 +21,7 @@ export const EditPostPage = () => {
         const { data } = await axios.get(`/posts/${params.id}`)
         setTitle(data.title)
         setText(data.text)
+        setArea(data.area)
         setOldImage(data.imgUrl)
     }, [params.id])
 
@@ -28,6 +30,7 @@ export const EditPostPage = () => {
             const updatedPost = new FormData()
             updatedPost.append('title', title)
             updatedPost.append('text', text)
+            updatedPost.append('area', area)
             updatedPost.append('id', params.id)
             updatedPost.append('image', newImage)
             dispatch(updatePost(updatedPost))
@@ -40,6 +43,7 @@ export const EditPostPage = () => {
     const clearFormHandler = () => {
         setTitle('')
         setText('')
+        setArea('')
     }
 
     useEffect(() => {
@@ -78,24 +82,35 @@ export const EditPostPage = () => {
             </div>
 
             <label className='text-xs text-white opacity-70'>
-                Заголовок поста:
+                Название поля:
                 <input
                     type='text'
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder='Заголовок'
+                    placeholder='Название'
                     className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none placeholder:text-gray-700'
                 />
             </label>
 
             <label className='text-xs text-white opacity-70'>
-                Текст поста:
+                Описание поля:
                 <textarea
                     onChange={(e) => setText(e.target.value)}
                     value={text}
-                    placeholder='Текст поста'
+                    placeholder='Описание поля'
                     className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none resize-none h-40 placeholder:text-gray-700'
                 />
+            </label>
+
+            <label className='text-xs text-white opacity-70 '>
+                Введите площадь поля(в квадратных метрах)
+                <input
+                    type={"number"}
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                    className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none resize-none placeholder:text-gray-700'
+                />
+
             </label>
 
             <div className='flex gap-8 items-center justify-center mt-4'>
